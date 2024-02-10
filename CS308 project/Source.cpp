@@ -64,24 +64,43 @@ void leafs() {
 	glEnd();
 }
 
-void leafsOnBranch() {
-	GLfloat x = 0, y = 0, z = 0;
+void leafsOnBranch(GLfloat r) {
+	GLfloat x = 0, y = 0.0, z = 0;
 	GLfloat angle = 0.0;
-	GLfloat fractionalrotate = 0.0;
+	GLfloat angleY = 0.0;
 
-	for (int i = 0; i < 10; i++) {
-		glPushMatrix();
-		x = 1 * cos(angle);
-		z = 1 * sin(angle);
-		glTranslatef(x, y, z);
-		glRotatef(90 + fractionalrotate, 0.0, 1.0, 0.0);
-		glRotatef(90, 1.0, 0.0, 0.0);
-		leafs();
-		glPopMatrix();
-		angle += PI * 2 / 10;
-		fractionalrotate += 40;
+	for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < 10; i++) {
+			glPushMatrix();
+			x = r * cos(angle);
+			z = r * sin(angle);
+			glTranslatef(x, y, z);
+			glRotatef(angle + 90, 0.0, 1.0, 0.0);
+			glRotatef(90, 1.0, 0.0, 0.0);
+			leafs();
+			glPopMatrix();
+			angle += PI * 2 / 10;
+		}
+		//angle = 0.0;
+		//for (int i = 0; i < 10; i++) {
+		//	glPushMatrix();
+		//	x = r * cos(angle);
+		//	z = r * sin(angle);
+		//	glTranslatef(x,-0.1 - y, z);
+		//	glRotatef(angle - 90, 0.0, 1.0, 0.0);
+		//	glRotatef(90, 1.0, 0.0, 0.0);
+		//	leafs();
+		//	glPopMatrix();
+		//	angle += PI * 2 / 10;
+		//}
+		angle = 0.0;
+		y = sin(angleY) / 2;
+		r = cos(angleY) / 2;
+		angleY += PI * 2 / 10;
 	}
+
 }
+
 
 void tree() {
 	glPushMatrix();
@@ -105,6 +124,47 @@ void tree() {
 	glPopMatrix();
 }
 
+void cupForTheTrunk(GLfloat r) {
+	GLfloat angle = 0.0;
+	glBegin(GL_POLYGON);
+	for (int i = 0; i < 180; i++) {
+		GLfloat x = r * cos(angle);
+		GLfloat z = r * sin(angle);
+		glVertex3f(x, 0.0, z);
+		angle += 2 * PI / 180;
+	}
+	glEnd();
+}
+
+void trunk() {
+	glColor3f(0.30, 0.20, 0.18);
+	GLfloat h = 3.0, translatefactor = 0.0, r = 1.0;
+
+	for (int i = 0; i < 3; i++) {
+		glPushMatrix();
+		glTranslatef(0.0, translatefactor, 0.0);
+		glRotatef(-90, 1.0, 0.0, 0.0);
+		gluCylinder(gluNewQuadric(), 1.0 - i * 0.2, 1.0 - i * 0.2, h, 50, 50);
+		glPopMatrix();
+		translatefactor += h;
+		h -= i * 0.1;
+
+		glPushMatrix();
+		glTranslatef(0.0, translatefactor, 0.0);
+		cupForTheTrunk(1.0 - i * 0.2);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0.0, translatefactor, 0.0);
+		glRotatef(90 * i, 0.0, 1.0, 0.0);
+		glRotatef(-45, 1.0, 0.0, 0.0);
+		gluCylinder(gluNewQuadric(), 0.5 - i * 0.1, 0.5 - i * 0.1, h - 0.2, 50, 50);
+		glPopMatrix();
+
+
+	}
+}
+
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -116,15 +176,14 @@ void display() {
 	glColor3f(1.0, 1.0, 1.0);
 	grid();
 
-	fullterrain();
+	//fullterrain();
 
+	//trunk();
 
-
-
-	//glPushMatrix();
-	//glScalef(10, 10, 10);
-	//leafsOnBranch();
-	////glPopMatrix();
+	glPushMatrix();
+	glScalef(10, 10, 10);
+	leafsOnBranch(1.0);
+	glPopMatrix();
 
 	//tree();
 	glPopMatrix();
