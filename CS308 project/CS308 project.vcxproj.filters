@@ -32,5 +32,8 @@
     <ClInclude Include="water.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bambootree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

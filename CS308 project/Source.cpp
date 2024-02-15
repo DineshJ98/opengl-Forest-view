@@ -5,11 +5,11 @@
 #include"normalTree.h"
 #include"grass.h"
 #include"water.h"
+#include"bambootree.h"
 
 //move the camera
 GLfloat camX = 0, camY = 0, camZ = 0;
 GLfloat objRY = 0;
-//GLfloat PI = 3.141592653589;
 GLfloat animationfactor = 0.0;
 GLfloat h[20][20];
 GLfloat rowsh = 20, colsh = 20;
@@ -55,7 +55,6 @@ void grid() {
 	}
 }
 
-
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -67,10 +66,8 @@ void display() {
 	glColor3f(1.0, 1.0, 1.0);
 	grid();
 
-	fullterrain();
-	fullwater(h);
 	
-
+	bambooTree(1.0, 0.0, -4.0, 90.0);
 
 	//tree(10.0, 0.0, 10.0, 0.0);
 	//tree(14.0, 0.0, -10.0, 45.0);

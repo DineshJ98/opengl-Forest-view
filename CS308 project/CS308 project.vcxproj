@@ -136,6 +136,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bambootree.h" />
     <ClInclude Include="grass.h" />
     <ClInclude Include="normalTree.h" />
     <ClInclude Include="terrain.h" />
