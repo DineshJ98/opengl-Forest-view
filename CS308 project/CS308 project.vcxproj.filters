@@ -26,5 +26,11 @@
     <ClInclude Include="normalTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="grass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="water.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
