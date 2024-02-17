@@ -135,6 +135,10 @@ void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate, GLfloat textureId) {
 
 
 		glPushMatrix();
+		glMaterialfv(GL_FRONT, GL_AMBIENT, treeleaf);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, treediff);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, treeleaf);
+		glMaterialf(GL_FRONT, GL_SHININESS, 10);
 		glTranslatef(x, y, z);
 		glRotatef(90 * i + rotate, 0.0, 1.0, 0.0);
 		glTranslatef(0.4, translatefactor + h / 2, 0.2 + h / 2);

@@ -13,10 +13,10 @@
 //move the camera
 GLfloat camX = 0, camY = 5.0, camZ = 5.0;
 GLfloat objRY = 0;
-GLfloat animationfactor = 0.0;
+GLfloat angle = 0.0, xs = 0.0, zs = 0.0, swanrotationfactor = 90.0;
 GLfloat h[20][20];
 GLfloat rowsh = 20, colsh = 20;
-
+GLfloat PIswan = 3.141592653589;
 
 GLfloat textureIdsoil;
 GLfloat textureIdrock;
@@ -245,14 +245,28 @@ void display() {
 	glScalef(1.1, 1.0, 1.7);
 	rock(textureIdrock);
 	glPopMatrix();
-	
+
 	glPushMatrix();
-	glTranslatef(0.0, 5.0, 0.0);
+	glTranslatef(xs, 1.0, zs);
+	glRotatef(swanrotationfactor, 0.0, 1.0, 0.0);
 	swan();
 	glPopMatrix();
 
 	glPopMatrix();
 	glutSwapBuffers();
+
+	swanrotationfactor -= 360 / 60;
+	angle += 2 * PIswan / 60;
+	xs = 2.0 * cos(angle);
+	zs = 2.0 * sin(angle);
+
+	if (angle >  2 * PIswan) {
+		angle = 0.0;
+	}
+	
+	if (swanrotationfactor < -270) {
+		swanrotationfactor = 90.0;
+	}
 
 	for (int i = 0; i < rowsh; ++i) {
 		for (int j = 0; j < colsh; ++j) {
@@ -313,7 +327,6 @@ void specialkeyboard(int key, int x, int y) {
 }
 
 void animation(int value) {
-	animationfactor += 0.1;
 	glutPostRedisplay();
 	glutTimerFunc(280, animation, 0);
 }
