@@ -1,0 +1,26 @@
+#include<SOIL2.h>
+#include <math.h>
+#include <GL/glut.h>
+
+void rock(GLfloat textureId) {
+
+	glEnable(GL_TEXTURE_2D);
+
+	GLfloat rockcolor[] = { 0.2745,0.1803,0.1019,1.0 };
+	GLfloat rockDeffu[] = { 0.2,0.2,0.2,1.0 };
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, rockcolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, rockDeffu);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, rockcolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+
+	GLUquadric* quad = gluNewQuadric();
+	gluQuadricTexture(quad, GL_TRUE);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
+	gluSphere(quad, 2.0, 50, 50);
+
+	gluDeleteQuadric(quad);
+
+	glDisable(GL_TEXTURE_2D);
+}

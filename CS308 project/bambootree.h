@@ -2,9 +2,21 @@
 #include<math.h>
 
 GLfloat PIs = 3.141592653589;
+GLfloat bambooleafcolor[] = { 0.34,0.4267, 0.274,1.0 };
+GLfloat materialDeffu[] = { 0.2,0.2,0.2,1.0 };
+GLfloat bambooyellow[] = { 0.682,0.533,0.294,1.0 };
 
 void bambooLeaf() {
-	glColor3f(0.5, 0.8, 0.6);
+
+	
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, bambooleafcolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, materialDeffu);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, bambooleafcolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 1);
+
+
+	//glColor3f(0.5, 0.8, 0.6);
 	glBegin(GL_POLYGON);
 	glVertex3f(0.0, 0.2, 0.0);
 	glVertex3f(0.4, 0.1, 0.0);
@@ -41,7 +53,13 @@ void bambooTree(GLfloat movex, GLfloat movey, GLfloat movez, GLfloat rotatefacto
 	GLfloat angle = PIs;
 	GLfloat r = 6.0, x = 0.0, y = 0.0;
 
+
 	for (int i = 0; i <= 6; i++) {
+
+		glMaterialfv(GL_FRONT, GL_AMBIENT, bambooyellow);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, materialDeffu);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, bambooleafcolor);
+		glMaterialf(GL_FRONT, GL_SHININESS, 100);
 
 		x = r * cos(angle);
 		y = r * sin(angle);

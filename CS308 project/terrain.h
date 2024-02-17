@@ -1,7 +1,20 @@
 #include<GL/glut.h>
 #include<math.h>
 
+
+GLfloat soilcolor[] = { 0.2745,0.1803,0.1019,1.0 };
+GLfloat soilDeffu[] = { 0.2,0.2,0.2,1.0 };
+GLfloat soilgrasscolor[] = { 0.4862 ,0.9882 ,0.0,1.0 };
+
+
+
 void cornerhills1() {
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, soilgrasscolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, soilgrasscolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+
 	GLfloat height[10][10] = {
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{ 1, 1.5, 1.8, 2.2, 2.5, 2.5, 2.5, 2.2, 1.5, 1 },
@@ -19,22 +32,22 @@ void cornerhills1() {
 	for (int i = 0; i < rows - 1; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 0.0);
 			glVertex3f(j, height[j][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(j, height[j][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(j + 1, height[j + 1][i], i);
 		}
 		glEnd();
 
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(j + 1, height[j + 1][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 1.0);
 			glVertex3f(j + 1, height[j + 1][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(j, height[j][i + 1], i + 1);
 		}
 		glEnd();
@@ -42,6 +55,12 @@ void cornerhills1() {
 }
 
 void cornerhills2() {
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, soilgrasscolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, soilgrasscolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+
 	GLfloat height[10][10] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	{1, 1.5, 2, 2, 2, 2, 2, 1.5, 1, 1},
@@ -59,22 +78,22 @@ void cornerhills2() {
 	for (int i = 0; i < rows - 1; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 0.0);
 			glVertex3f(j, height[j][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(j, height[j][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(j + 1, height[j + 1][i], i);
 		}
 		glEnd();
 
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(j + 1, height[j + 1][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 1.0);
 			glVertex3f(j + 1, height[j + 1][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(j, height[j][i + 1], i + 1);
 		}
 		glEnd();
@@ -82,6 +101,10 @@ void cornerhills2() {
 }
 
 void terrain() {
+	glMaterialfv(GL_FRONT, GL_AMBIENT, soilgrasscolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, soilgrasscolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
 
 	GLfloat height[10][20] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -100,28 +123,34 @@ void terrain() {
 	for (int i = 0; i < rows - 1; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 0.0);
 			glVertex3f(j, height[j][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(j, height[j][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(j + 1, height[j + 1][i], i);
 		}
 		glEnd();
 
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 0.0);
 			glVertex3f(j + 1, height[j + 1][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(1.0, 1.0);
 			glVertex3f(j + 1, height[j + 1][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
+			glTexCoord2f(0.0, 1.0);
 			glVertex3f(j, height[j][i + 1], i + 1);
 		}
 		glEnd();
 	}
 }
 void pond() {
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, soilcolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, soilcolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+
 	GLfloat height[20][20] = {
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{ 1, 0.988235, 0.976471, 0.964706, 0.952941, 0.941176, 0.929412, 0.917647, 0.905882, 0.894118, 0.882353, 0.870588, 0.858824, 0.847059, 0.835294, 0.823529, 0.811765, 0.8, 0.788235, 1 },
@@ -150,22 +179,16 @@ void pond() {
 	for (int i = 0; i < rows - 1; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
 			glVertex3f(j, height[j][i], i);
-			glColor3f(1.0 / height[j][i + 1], 1.0 / height[j][i + 1], 1.0 / height[j][i + 1]);
 			glVertex3f(j, height[j][i + 1], i + 1);
-			glColor3f(1.0 / height[j + 1][i], 1.0 / height[j + 1][i], 1.0 / height[j + 1][i]);
 			glVertex3f(j + 1, height[j + 1][i], i);
 		}
 		glEnd();
 
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int j = 0; j < cols - 1; j++) {
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
 			glVertex3f(j + 1, height[j + 1][i], i);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
 			glVertex3f(j + 1, height[j + 1][i + 1], i + 1);
-			glColor3f(1.0 / height[j][i], 1.0 / height[j][i], 1.0 / height[j][i]);
 			glVertex3f(j, height[j][i + 1], i + 1);
 		}
 		glEnd();
@@ -173,6 +196,8 @@ void pond() {
 }
 
 void fullterrain() {
+	glEnable(GL_TEXTURE_2D);
+
 	glPushMatrix();
 	glTranslatef(-15.0, 0.0, 13.0);
 	glRotatef(180, 0.0, 1.0, 0.0);
@@ -190,16 +215,12 @@ void fullterrain() {
 	cornerhills1();//bottom right 
 	glPopMatrix();
 
+
 	glPushMatrix();
 	glTranslatef(-15.0, 0.0, -15.0);
 	glRotatef(180, 0.0, 1.0, 0.0);
 	glTranslatef(-5.0, 0.0, -5.0);
 	cornerhills1();//top left 
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(-10.0, 0.0, -10.0);
-	pond();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -225,4 +246,11 @@ void fullterrain() {
 	glTranslatef(-19.0, 0.0, -10.0);
 	terrain();//left
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
+	glPushMatrix();
+	glTranslatef(-10.0, 0.0, -10.0);
+	pond();
+	glPopMatrix();
+
 }

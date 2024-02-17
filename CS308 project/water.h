@@ -1,8 +1,15 @@
 #include<GL/glut.h>
 #include<math.h>
 
+GLfloat watercolor[] = { 0.1373,0.5373,0.8549,1.0 };
+GLfloat waterDiff[] = { 0.2,0.2,0.2,1.0 };
+
 void underTheWater() {
-	glColor3f(0.0, 0.0, 1.0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, watercolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, waterDiff);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, watercolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 100);
+
 	glPushMatrix();
 	glTranslatef(0.0, 0.4, 0.0);
 	glScalef(20.0, 1.0, 20.0);
@@ -42,7 +49,7 @@ void fullwater(GLfloat h[20][20]) {
 	underTheWater();
 
 	glPushMatrix();
-	glTranslatef(-10.0, 0.55, -10.0);
+	glTranslatef(-10.0, 0.59, -10.0);
 	water(h);
 	glPopMatrix();
 }

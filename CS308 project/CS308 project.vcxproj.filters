@@ -35,5 +35,8 @@
     <ClInclude Include="bambootree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

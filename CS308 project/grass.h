@@ -1,7 +1,17 @@
 #include<GL/glut.h>
 #include<math.h>
 
+GLfloat grasscolor[] = { 0.4862 ,0.9882 ,0.0,1.0 };
+GLfloat grassdiff[] = { 0.2 ,0.2,0.2,1.0 };
+
+
 void grassLeaf1() {
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, grasscolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, grassdiff);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, grasscolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+
 	glColor3f(0.05, 0.9, 0.2);
 	glBegin(GL_POLYGON);
 	glVertex3f(0.05, 0.0, 0.0);
@@ -46,6 +56,11 @@ void grassLeaf3() {
 }
 
 void grassFull() {
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, grasscolor);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, grassdiff);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, grasscolor);
+	glMaterialf(GL_FRONT, GL_SHININESS, 10);
 
 	glColor3f(0.5, 0.9, 0.7);
 	glPushMatrix();
