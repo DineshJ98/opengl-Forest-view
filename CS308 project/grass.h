@@ -59,6 +59,7 @@ void grassFull() {
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glShadeModel(GL_SMOOTH);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, grasscolor);
@@ -85,5 +86,6 @@ void grassFull() {
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
 }
 

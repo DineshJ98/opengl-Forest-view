@@ -48,6 +48,7 @@ void water(GLfloat height[20][20]) {
 void fullwater(GLfloat h[20][20]) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glShadeModel(GL_SMOOTH);
 
 	underTheWater();
@@ -59,4 +60,5 @@ void fullwater(GLfloat h[20][20]) {
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
 }

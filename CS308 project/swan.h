@@ -9,6 +9,7 @@ GLfloat beak[] = { 0.9843,0.6039,0.3725,1.0 };
 void swan() {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glShadeModel(GL_SMOOTH);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, white);
@@ -86,4 +87,5 @@ void swan() {
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
 }

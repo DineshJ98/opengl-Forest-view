@@ -5,6 +5,7 @@
 void rock(GLfloat textureId) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
@@ -27,4 +28,5 @@ void rock(GLfloat textureId) {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
 }

@@ -140,9 +140,11 @@
     <ClInclude Include="grass.h" />
     <ClInclude Include="normalTree.h" />
     <ClInclude Include="rock.h" />
+    <ClInclude Include="sky.h" />
     <ClInclude Include="swan.h" />
     <ClInclude Include="terrain.h" />
     <ClInclude Include="water.h" />
+    <ClInclude Include="waterlily.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

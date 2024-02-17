@@ -41,5 +41,11 @@
     <ClInclude Include="swan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="waterlily.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sky.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

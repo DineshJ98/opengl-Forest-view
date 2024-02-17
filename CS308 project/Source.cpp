@@ -9,6 +9,7 @@
 #include"bambootree.h"
 #include"rock.h"
 #include"swan.h"
+#include"sky.h"
 
 //move the camera
 GLfloat camX = 0, camY = 5.0, camZ = 5.0;
@@ -21,6 +22,7 @@ GLfloat PIswan = 3.141592653589;
 GLfloat textureIdsoil;
 GLfloat textureIdrock;
 GLfloat textureIdtree;
+GLfloat textureIdsky;
 
 
 void axis() {
@@ -61,6 +63,19 @@ void grid() {
 		glVertex3f(ext, yGrid, line);
 		glVertex3f(-ext, yGrid, line);
 		glEnd();
+	}
+}
+
+void loadTexturesky() {
+	textureIdsky = SOIL_load_OGL_texture(
+		"sky.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!textureIdsky) {
+		printf("Texture load failed: %s\n", SOIL_last_result());
 	}
 }
 
@@ -115,8 +130,17 @@ void setLighting() {
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
 
 	//set position of the light
-	GLfloat qaLightPosition[] = { 0.0, 1.0, 4.0, 1.0 };
-	glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
+	GLfloat qaLightPosition0[] = { -1.0, 0.5, 0.5, 0.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition0);
+
+	
+	glLightfv(GL_LIGHT1, GL_AMBIENT, qaAmbientLight);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, qaDiffuseLight);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, qaSpecularLight);
+
+	//set position of the light
+	GLfloat qaLightPosition1[] = { -1.0, 5.0, 15.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, qaLightPosition1);
 }
 
 
@@ -129,12 +153,12 @@ void display() {
 
 
 	glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
+	glLoadIdentity();
+	gluLookAt(0.0 + camX, 3.0 + camY, 10.0 + camZ, 0, 0, 0, 0, 1, 0);
 
 
 
 	glPushMatrix();
-	gluLookAt(0.0 + camX, 3.0 + camY, 10.0 + camZ, 0, 0, 0, 0, 1, 0);
 	glRotatef(objRY, 0.0, 1.0, 0.0);
 
 	/*axis();
@@ -252,6 +276,8 @@ void display() {
 	swan();
 	glPopMatrix();
 
+	sky(textureIdsky);
+
 	glPopMatrix();
 	glutSwapBuffers();
 
@@ -291,6 +317,7 @@ void MyInit() {
 	loadTextureRock();
 	loadTexture();
 	loadTexturetree();
+	loadTexturesky();
 }
 
 void keyboard(unsigned char key, int x, int y) {

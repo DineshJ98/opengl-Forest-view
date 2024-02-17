@@ -52,6 +52,7 @@ void bambooTree(GLfloat movex, GLfloat movey, GLfloat movez, GLfloat rotatefacto
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glShadeModel(GL_SMOOTH);
 
 	GLfloat angle = PIs;
@@ -103,5 +104,6 @@ void bambooTree(GLfloat movex, GLfloat movey, GLfloat movez, GLfloat rotatefacto
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
 
 }
