@@ -8,6 +8,7 @@
 #include"water.h"
 #include"bambootree.h"
 #include"rock.h"
+#include"swan.h"
 
 //move the camera
 GLfloat camX = 0, camY = 5.0, camZ = 5.0;
@@ -17,7 +18,9 @@ GLfloat h[20][20];
 GLfloat rowsh = 20, colsh = 20;
 
 
-GLfloat textureId;
+GLfloat textureIdsoil;
+GLfloat textureIdrock;
+GLfloat textureIdtree;
 
 
 void axis() {
@@ -61,27 +64,40 @@ void grid() {
 	}
 }
 
+void loadTexturetree() {
+	textureIdtree = SOIL_load_OGL_texture(
+		"wood.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!textureIdtree) {
+		printf("Texture load failed: %s\n", SOIL_last_result());
+	}
+}
+
 void loadTexture() {
-	textureId = SOIL_load_OGL_texture(
+	textureIdsoil = SOIL_load_OGL_texture(
 		"terrain.jpg",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
 	);
 
-	if (!textureId) {
+	if (!textureIdsoil) {
 		printf("Texture load failed: %s\n", SOIL_last_result());
 	}
 }
 void loadTextureRock() {
-	textureId = SOIL_load_OGL_texture(
+	textureIdrock = SOIL_load_OGL_texture(
 		"rock.jpg",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
 	);
 
-	if (!textureId) {
+	if (!textureIdrock) {
 		printf("Texture load failed: %s\n", SOIL_last_result());
 	}
 }
@@ -135,7 +151,7 @@ void display() {
 	bambooTree(-10.0, 0.0, 10.0, 30.0);
 	bambooTree(-12.0, 0.0, 12.0, 45.0);
 	bambooTree(-12.0, 0.0, 9.0, -45.0);
-	
+
 	bambooTree(-10.0, 0.0, -10.0, 180.0);
 	bambooTree(-10.0, 0.0, -10.0, 30.0);
 	bambooTree(-12.0, 0.0, -12.0, 90.0);
@@ -148,7 +164,7 @@ void display() {
 
 	for (int i = 0; i < 4; i++) {
 		glPushMatrix();
-		glTranslatef(-5.0 + (-1) * i, 1.0 , -5.0 + (-1) * i);
+		glTranslatef(-5.0 + (-1) * i, 1.0, -5.0 + (-1) * i);
 		grassFull();
 		glPopMatrix();
 	}
@@ -178,14 +194,14 @@ void display() {
 		grassFull();
 		glPopMatrix();
 	}
-	
+
 	for (int i = 0; i < 4; i++) {
 		glPushMatrix();
 		glTranslatef(7.0 + (-1) * i, 1.0, 9.0 + (-1) * i);
 		grassFull();
 		glPopMatrix();
 	}
-	
+
 	for (int i = 0; i < 4; i++) {
 		glPushMatrix();
 		glTranslatef(9.0 + (-1) * i, 1.0, 9.0 + (-1) * i);
@@ -194,42 +210,45 @@ void display() {
 	}
 
 
-	loadTexture();
-	fullterrain();
+	fullterrain(textureIdsoil);
 	fullwater(h);
 
-	tree(-10.0, 0.0, -20.0, 0.0);
-	tree(15.0, 1.0, 9.0, 60.0);
+	tree(-10.0, 0.0, -16.0, 0.0, textureIdtree);
+	tree(15.0, 1.0, 9.0, 60.0, textureIdtree);
 
-	loadTextureRock();
 	glPushMatrix();
 	glTranslatef(8.0, 1.0, 7.0);
 	glScalef(0.7, 1.0, 0.4);
-	rock(textureId);
+	rock(textureIdrock);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(7.0, 2.0, 9.0);
 	glScalef(0.5, 1.0, 0.1);
-	rock(textureId);
+	rock(textureIdrock);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-10.0, 2.0, 0.0);
 	glScalef(1.1, 1.0, 1.7);
-	rock(textureId);
+	rock(textureIdrock);
 	glPopMatrix();
-	
+
 	glPushMatrix();
 	glTranslatef(-11.0, 2.0, 5.0);
 	glScalef(0.7, 0.7, 1.0);
-	rock(textureId);
+	rock(textureIdrock);
 	glPopMatrix();
-	
+
 	glPushMatrix();
 	glTranslatef(10.0, 2.0, -10.0);
 	glScalef(1.1, 1.0, 1.7);
-	rock(textureId);
+	rock(textureIdrock);
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(0.0, 5.0, 0.0);
+	swan();
 	glPopMatrix();
 
 	glPopMatrix();
@@ -255,10 +274,9 @@ void reshape(GLsizei w, GLsizei h) {
 void MyInit() {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glShadeModel(GL_SMOOTH);
-
+	loadTextureRock();
+	loadTexture();
+	loadTexturetree();
 }
 
 void keyboard(unsigned char key, int x, int y) {

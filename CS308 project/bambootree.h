@@ -50,6 +50,10 @@ void bambooLeafSegment() {
 
 void bambooTree(GLfloat movex, GLfloat movey, GLfloat movez, GLfloat rotatefactor) {
 
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
+
 	GLfloat angle = PIs;
 	GLfloat r = 6.0, x = 0.0, y = 0.0;
 
@@ -96,5 +100,8 @@ void bambooTree(GLfloat movex, GLfloat movey, GLfloat movez, GLfloat rotatefacto
 	glRotatef(90, 0.0, 1.0, 0.0);
 	glutSolidCone(0.2, 1.0, 50, 50);
 	glPopMatrix();
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 
 }

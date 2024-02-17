@@ -8,7 +8,11 @@ GLfloat soilgrasscolor[] = { 0.4862 ,0.9882 ,0.0,1.0 };
 
 
 
-void cornerhills1() {
+void cornerhills1(GLfloat textureId) {
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBindTexture(GL_TEXTURE_2D, textureId);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, soilgrasscolor);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
@@ -52,9 +56,14 @@ void cornerhills1() {
 		}
 		glEnd();
 	}
+
 }
 
-void cornerhills2() {
+void cornerhills2(GLfloat textureId) {
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBindTexture(GL_TEXTURE_2D, textureId);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, soilgrasscolor);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
@@ -100,7 +109,12 @@ void cornerhills2() {
 	}
 }
 
-void terrain() {
+void terrain(GLfloat textureId) {
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
 	glMaterialfv(GL_FRONT, GL_AMBIENT, soilgrasscolor);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, soilgrasscolor);
@@ -145,6 +159,8 @@ void terrain() {
 	}
 }
 void pond() {
+
+	
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, soilcolor);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, soilDeffu);
@@ -195,24 +211,27 @@ void pond() {
 	}
 }
 
-void fullterrain() {
+void fullterrain(GLfloat textureId) {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
 	glPushMatrix();
 	glTranslatef(-15.0, 0.0, 13.0);
 	glRotatef(180, 0.0, 1.0, 0.0);
 	glTranslatef(-5.0, 0.0, -5.0);
-	cornerhills2();//bottom left
+	cornerhills2(textureId);//bottom left
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(9.0, 0.0, -19.0);
-	cornerhills2();//top right 
+	cornerhills2(textureId);//top right 
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(9.0, 0.0, 9.0);
-	cornerhills1();//bottom right 
+	cornerhills1(textureId);//bottom right 
 	glPopMatrix();
 
 
@@ -220,31 +239,31 @@ void fullterrain() {
 	glTranslatef(-15.0, 0.0, -15.0);
 	glRotatef(180, 0.0, 1.0, 0.0);
 	glTranslatef(-5.0, 0.0, -5.0);
-	cornerhills1();//top left 
+	cornerhills1(textureId);//top left 
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0.0, 0.0, 13.0);
 	glRotatef(-90, 0.0, 1.0, 0.0);
 	glTranslatef(-4.0, 0.0, -9.0);
-	terrain();//bottom
+	terrain(textureId);//bottom
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-1.0, 0.0, -14.0);
 	glRotatef(90, 0.0, 1.0, 0.0);
 	glTranslatef(-4.0, 0.0, -9.0);
-	terrain();//top
+	terrain(textureId);//top
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(9.0, 0.0, -10.0);
-	terrain();//right
+	terrain(textureId);//right
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-19.0, 0.0, -10.0);
-	terrain();//left
+	terrain(textureId);//left
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
@@ -253,4 +272,6 @@ void fullterrain() {
 	pond();
 	glPopMatrix();
 
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 }

@@ -3,7 +3,9 @@
 #include <GL/glut.h>
 
 void rock(GLfloat textureId) {
-
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
 	GLfloat rockcolor[] = { 0.2745,0.1803,0.1019,1.0 };
@@ -23,4 +25,6 @@ void rock(GLfloat textureId) {
 	gluDeleteQuadric(quad);
 
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 }

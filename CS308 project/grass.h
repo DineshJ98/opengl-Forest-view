@@ -57,6 +57,10 @@ void grassLeaf3() {
 
 void grassFull() {
 
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
+
 	glMaterialfv(GL_FRONT, GL_AMBIENT, grasscolor);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, grassdiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, grasscolor);
@@ -78,5 +82,8 @@ void grassFull() {
 		grassLeaf2();
 		glPopMatrix();
 	}
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 }
 

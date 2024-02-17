@@ -46,10 +46,17 @@ void water(GLfloat height[20][20]) {
 }
 
 void fullwater(GLfloat h[20][20]) {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
+
 	underTheWater();
 
 	glPushMatrix();
 	glTranslatef(-10.0, 0.59, -10.0);
 	water(h);
 	glPopMatrix();
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 }

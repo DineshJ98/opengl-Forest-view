@@ -2,7 +2,7 @@
 #include<math.h>#pragma once
 GLfloat PI = 3.141592653589;
 
-GLfloat treeleaf[] = { 0.0196 ,0.2784 ,0.1647 ,1.0 };
+GLfloat treeleaf[] = { 0.5647 ,0.9333 ,0.5647 ,1.0 };
 GLfloat treediff[] = { 0.3 ,0.3 ,0.3 ,1.0 };
 GLfloat treetrunk[] = { 0.447,0.3725,0.2941,1.0 };
 
@@ -85,21 +85,32 @@ void cupForTheTrunk(GLfloat r) {
 	glEnd();
 }
 
-void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate) {
+void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate, GLfloat textureId) {
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_TEXTURE_2D);
+
+	GLUquadric* quad = gluNewQuadric();
+	gluQuadricTexture(quad, GL_TRUE);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
 	GLfloat h = 3.0, translatefactor = 0.0, r = 1.0;
 
 	for (int i = 0; i < 3; i++) {
 
+		
+
+		glColor3f(0.30, 0.20, 0.18);
+		glPushMatrix();
 		glMaterialfv(GL_FRONT, GL_AMBIENT, treetrunk);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, treediff);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, treetrunk);
 		glMaterialf(GL_FRONT, GL_SHININESS, 30);
-
-		glColor3f(0.30, 0.20, 0.18);
-		glPushMatrix();
 		glTranslatef(0.0 + x, translatefactor + y, 0.0 + z);
 		glRotatef(-90, 1.0, 0.0, 0.0);
-		gluCylinder(gluNewQuadric(), 1.0 - i * 0.2, 1.0 - i * 0.2, h, 50, 50);
+		gluCylinder(quad, 1.0 - i * 0.2, 1.0 - i * 0.2, h, 50, 50);
 		glPopMatrix();
 		translatefactor += h;
 		h -= i * 0.1;
@@ -112,10 +123,14 @@ void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate) {
 
 		glColor3f(0.30, 0.20, 0.18);
 		glPushMatrix();
+		glMaterialfv(GL_FRONT, GL_AMBIENT, treetrunk);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, treediff);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, treetrunk);
+		glMaterialf(GL_FRONT, GL_SHININESS, 30);
 		glTranslatef(0.0 + x, translatefactor + y, 0.0 + z);
 		glRotatef(90 * i + rotate, 0.0, 1.0, 0.0);
 		glRotatef(-45, 1.0, 0.0, 0.0);
-		gluCylinder(gluNewQuadric(), 0.5 - i * 0.1, 0.5 - i * 0.1, h - 0.2, 50, 50);
+		gluCylinder(quad, 0.5 - i * 0.1, 0.5 - i * 0.1, h - 0.2, 50, 50);
 		glPopMatrix();
 
 
@@ -126,6 +141,7 @@ void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate) {
 		glScalef(0.5, 0.5, 0.5);
 		leafsOnBranch(1.0);
 		glPopMatrix();
+
 
 		glPushMatrix();
 		glTranslatef(x, y, z);
@@ -168,4 +184,11 @@ void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate) {
 		glPopMatrix();
 
 	}
+
+	gluDeleteQuadric(quad);
+
+
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 }
