@@ -1,6 +1,3 @@
-#include<SOIL2.h>
-#include <math.h>
-#include <GL/glut.h>
 
 void rock(GLfloat textureId) {
 	glEnable(GL_LIGHTING);

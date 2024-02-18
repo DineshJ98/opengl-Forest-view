@@ -1,5 +1,4 @@
-#include<GL/glut.h>
-#include<math.h>
+
 
 GLfloat PIs = 3.141592653589;
 GLfloat bambooleafcolor[] = { 0.34,0.4267, 0.274,1.0 };

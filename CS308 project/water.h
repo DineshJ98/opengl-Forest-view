@@ -1,5 +1,3 @@
-#include<GL/glut.h>
-#include<math.h>
 
 GLfloat watercolor[] = { 0.1373,0.5373,0.8549,1.0 };
 GLfloat waterDiff[] = { 0.2,0.2,0.2,1.0 };

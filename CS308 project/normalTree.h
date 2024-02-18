@@ -1,5 +1,3 @@
-#include<GL/glut.h>
-#include<math.h>#pragma once
 GLfloat PI = 3.141592653589;
 
 GLfloat treeleaf[] = { 0.5647 ,0.9333 ,0.5647 ,1.0 };
@@ -134,12 +132,12 @@ void tree(GLfloat x, GLfloat y, GLfloat z, GLfloat rotate, GLfloat textureId) {
 		gluCylinder(quad, 0.5 - i * 0.1, 0.5 - i * 0.1, h - 0.2, 50, 50);
 		glPopMatrix();
 
-
-		glPushMatrix();
 		glMaterialfv(GL_FRONT, GL_AMBIENT, treeleaf);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, treediff);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, treeleaf);
 		glMaterialf(GL_FRONT, GL_SHININESS, 10);
+
+		glPushMatrix();		
 		glTranslatef(x, y, z);
 		glRotatef(90 * i + rotate, 0.0, 1.0, 0.0);
 		glTranslatef(0.4, translatefactor + h / 2, 0.2 + h / 2);

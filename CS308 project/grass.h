@@ -1,5 +1,3 @@
-#include<GL/glut.h>
-#include<math.h>
 
 GLfloat grasscolor[] = { 0.4862 ,0.9882 ,0.0,1.0 };
 GLfloat grassdiff[] = { 0.2 ,0.2,0.2,1.0 };

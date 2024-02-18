@@ -1,6 +1,3 @@
-#include<GL/glut.h>
-#include<math.h>
-
 
 GLfloat soilcolor[] = { 0.2745,0.1803,0.1019,1.0 };
 GLfloat soilDeffu[] = { 0.2,0.2,0.2,1.0 };

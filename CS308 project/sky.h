@@ -1,8 +1,7 @@
-#include<GL/glut.h>
 
 GLfloat skycolor[] = { 0.5294,0.8078,0.9216,1.0 };
 
-void sky(GLfloat textureId) {
+void sky(GLfloat textureId, GLfloat textureId1) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT0);
@@ -11,7 +10,7 @@ void sky(GLfloat textureId) {
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glBindTexture(GL_TEXTURE_2D, textureId);
+	glBindTexture(GL_TEXTURE_2D, textureId1);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, skycolor);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, skycolor);
@@ -19,42 +18,49 @@ void sky(GLfloat textureId) {
 	glMaterialf(GL_FRONT, GL_SHININESS, 80);
 
 	glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0);
+	glTexCoord2f(0.25, 0.0);
 	glVertex3f(-19.0, 0.0, -19.0);//back
-	glTexCoord2f(1.0, 0.0);
+	glTexCoord2f(0.5, 0.0);
 	glVertex3f(18.0, 0.0, -19.0);
-	glTexCoord2f(1.0, 1.0);
+	glTexCoord2f(0.5, 1.0);
 	glVertex3f(18.0, 25.0, -19.0);
-	glTexCoord2f(0.0, 1.0);
+	glTexCoord2f(0.25, 1.0);
 	glVertex3f(-19.0, 25.0, -19.0);
-	
-	glTexCoord2f(0.0, 0.0);
+
+	glTexCoord2f(0.25, 0.0);
 	glVertex3f(-19.0, 0.0, -19.0);//left
-	glTexCoord2f(0.0, 1.0);
+	glTexCoord2f(0.25, 1.0);
 	glVertex3f(-19.0, 25.0, -19.0);
-	glTexCoord2f(1.0, 1.0);
+	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-19.0, 25.0, 18.0);
-	glTexCoord2f(1.0, 0.0);
+	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-19.0, 0.0, 18.0);
-	
-	glTexCoord2f(1.0, 0.0);
+
+	glTexCoord2f(0.5, 0.0);
 	glVertex3f(18.0, 0.0, -19.0);//right
-	glTexCoord2f(1.0, 1.0);
+	glTexCoord2f(0.5, 1.0);
 	glVertex3f(18.0, 25.0, -19.0);
-	glTexCoord2f(0.0, 1.0);
+	glTexCoord2f(0.75, 1.0);
 	glVertex3f(18.0, 25.0, 18.0);
-	glTexCoord2f(0.0, 0.0);
+	glTexCoord2f(0.75, 0.0);
 	glVertex3f(18.0, 0.0, 18.0);
-	
-	glTexCoord2f(0.0, 0.0);
-	glVertex3f(-19.0, 0.0, 18.0);//front
-	glTexCoord2f(0.0, 1.0);
-	glVertex3f(-19.0, 25.0, 18.0);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(18.0, 25.0, 18.0);
+
 	glTexCoord2f(1.0, 0.0);
+	glVertex3f(-19.0, 0.0, 18.0);//front
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-19.0, 25.0, 18.0);
+	glTexCoord2f(0.75, 1.0);
+	glVertex3f(18.0, 25.0, 18.0);
+	glTexCoord2f(0.75, 0.0);
 	glVertex3f(18.0, 0.0, 18.0);
-	
+
+	glEnd();
+
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-19.0, 25.0, -19.0);//top
 	glTexCoord2f(1.0, 0.0);
@@ -63,7 +69,6 @@ void sky(GLfloat textureId) {
 	glVertex3f(18.0, 25.0, 18.0);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-19.0, 25.0, 18.0);
-
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);

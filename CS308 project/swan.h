@@ -1,5 +1,4 @@
-#include<GL/glut.h>
-#include<math.h>
+
 
 GLfloat white[] = { 1.0,1.0,1.0,1.0 };
 GLfloat black[] = { 0.0,0.0,0.0,1.0 };

@@ -10,6 +10,7 @@
 #include"rock.h"
 #include"swan.h"
 #include"sky.h"
+#include"waterlily.h"
 
 //move the camera
 GLfloat camX = 0, camY = 5.0, camZ = 5.0;
@@ -23,6 +24,9 @@ GLfloat textureIdsoil;
 GLfloat textureIdrock;
 GLfloat textureIdtree;
 GLfloat textureIdsky;
+GLfloat textureIdflowerbase;
+GLfloat textureIdflowertop;
+GLfloat textureIdskybackground;
 
 
 void axis() {
@@ -63,6 +67,45 @@ void grid() {
 		glVertex3f(ext, yGrid, line);
 		glVertex3f(-ext, yGrid, line);
 		glEnd();
+	}
+}
+
+void loadTextureskybackground() {
+	textureIdskybackground = SOIL_load_OGL_texture(
+		"skyimage.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!textureIdskybackground) {
+		printf("Texture load failed: %s\n", SOIL_last_result());
+	}
+}
+
+void loadTextureflowertop() {
+	textureIdflowertop = SOIL_load_OGL_texture(
+		"flowertop.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!textureIdflowertop) {
+		printf("Texture load failed: %s\n", SOIL_last_result());
+	}
+}
+
+void loadTextureflowerbase() {
+	textureIdflowerbase = SOIL_load_OGL_texture(
+		"baseofflower.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!textureIdflowerbase) {
+		printf("Texture load failed: %s\n", SOIL_last_result());
 	}
 }
 
@@ -133,7 +176,7 @@ void setLighting() {
 	GLfloat qaLightPosition0[] = { -1.0, 0.5, 0.5, 0.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition0);
 
-	
+
 	glLightfv(GL_LIGHT1, GL_AMBIENT, qaAmbientLight);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, qaDiffuseLight);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, qaSpecularLight);
@@ -164,8 +207,6 @@ void display() {
 	/*axis();
 	glColor3f(1.0, 1.0, 1.0);
 	grid();*/
-	//loadTextureRock();
-	//rock(textureId);
 	bambooTree(10.0, 0.0, -10.0, 180.0);
 	bambooTree(10.0, 0.0, -10.0, 30.0);
 	bambooTree(12.0, 0.0, -12.0, 45.0);
@@ -180,6 +221,21 @@ void display() {
 	bambooTree(-10.0, 0.0, -10.0, 30.0);
 	bambooTree(-12.0, 0.0, -12.0, 90.0);
 	bambooTree(-12.0, 0.0, -9.0, -45.0);
+	
+	bambooTree(-15.0, 5.0, 0.0, -45.0);
+	bambooTree(-14.0, 5.0, -1.0, 0.0);
+
+	glPushMatrix();
+	glTranslatef(-7.5, 2.1, 11.0);
+	glScalef(1.0, 1.5, 1.0);
+	grassFull();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-7.5, 2.4, 12.0);
+	glScalef(1.5, 1.1, 1.0);
+	grassFull();
+	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-9.0, 1.0, -9.0);
@@ -248,7 +304,7 @@ void display() {
 
 	glPushMatrix();
 	glTranslatef(7.0, 2.0, 9.0);
-	glScalef(0.5, 1.0, 0.1);
+	glScalef(0.5, 1.0, 0.6);
 	rock(textureIdrock);
 	glPopMatrix();
 
@@ -271,12 +327,58 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
+	glTranslatef(-10.0, 2.0, 11.0);
+	glScalef(1.1, 0.5, 0.7);
+	rock(textureIdrock);
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(-13.7, 6.4, -1.0);
+	glScalef(0.5, 0.5, 0.7);
+	rock(textureIdrock);
+	glPopMatrix();
+
+	glPushMatrix();
 	glTranslatef(xs, 1.0, zs);
 	glRotatef(swanrotationfactor, 0.0, 1.0, 0.0);
 	swan();
 	glPopMatrix();
 
-	sky(textureIdsky);
+	glPushMatrix();
+	glTranslatef(5.0, 1.07, -5.0);
+	waterlily();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(2.0, 1.07, -5.0);
+	waterlily();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(3.5, 1.07, -7.0);
+	waterlily();
+	glPopMatrix();
+
+	waterlilyflower(3.7, 3.07, -5.4, textureIdflowertop, textureIdflowerbase);
+	
+	glPushMatrix();
+	glTranslatef(-5.4, 1.07, 5.0);
+	waterlily();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-2.4, 1.07, 5.0);
+	waterlily();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-3.9, 1.07, 7.0);
+	waterlily();
+	glPopMatrix();
+
+	waterlilyflower(-4.0, 3.07, 5.4, textureIdflowertop, textureIdflowerbase);
+
+	sky(textureIdsky,textureIdskybackground);
 
 	glPopMatrix();
 	glutSwapBuffers();
@@ -286,10 +388,10 @@ void display() {
 	xs = 2.0 * cos(angle);
 	zs = 2.0 * sin(angle);
 
-	if (angle >  2 * PIswan) {
+	if (angle > 2 * PIswan) {
 		angle = 0.0;
 	}
-	
+
 	if (swanrotationfactor < -270) {
 		swanrotationfactor = 90.0;
 	}
@@ -318,21 +420,24 @@ void MyInit() {
 	loadTexture();
 	loadTexturetree();
 	loadTexturesky();
+	loadTextureflowerbase();
+	loadTextureflowertop();
+	loadTextureskybackground();
 }
 
 void keyboard(unsigned char key, int x, int y) {
 
 	if (key == 'Z')
-		camZ += 0.5;
+		camZ += 1.0;
 
 	if (key == 'z')
-		camZ -= 0.5;
+		camZ -= 1.0;
 
 	if (key == 'r')
-		objRY += 0.5;
+		objRY += 1.0;
 
 	if (key == 'R')
-		objRY -= 0.5;
+		objRY -= 1.0;
 
 	glutPostRedisplay();
 }
