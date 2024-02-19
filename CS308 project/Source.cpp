@@ -27,6 +27,7 @@ GLfloat textureIdsky;
 GLfloat textureIdflowerbase;
 GLfloat textureIdflowertop;
 GLfloat textureIdskybackground;
+GLfloat textureIdwaterlilyleaf;
 
 
 void axis() {
@@ -67,6 +68,19 @@ void grid() {
 		glVertex3f(ext, yGrid, line);
 		glVertex3f(-ext, yGrid, line);
 		glEnd();
+	}
+}
+
+void loadTexturewaterlilyleaf() {
+	textureIdwaterlilyleaf = SOIL_load_OGL_texture(
+		"waterlilyleaf.jpg",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+	);
+
+	if (!textureIdwaterlilyleaf) {
+		printf("Texture load failed: %s\n", SOIL_last_result());
 	}
 }
 
@@ -147,6 +161,7 @@ void loadTexture() {
 		printf("Texture load failed: %s\n", SOIL_last_result());
 	}
 }
+
 void loadTextureRock() {
 	textureIdrock = SOIL_load_OGL_texture(
 		"rock.jpg",
@@ -160,8 +175,6 @@ void loadTextureRock() {
 	}
 }
 
-
-
 void setLighting() {
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 	//set lighting intensity and color
@@ -172,7 +185,7 @@ void setLighting() {
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, qaDiffuseLight);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
 
-	//set position of the light
+	//set direction of the light
 	GLfloat qaLightPosition0[] = { -1.0, 0.5, 0.5, 0.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition0);
 
@@ -346,34 +359,34 @@ void display() {
 
 	glPushMatrix();
 	glTranslatef(5.0, 1.07, -5.0);
-	waterlily();
+	waterlily(textureIdwaterlilyleaf);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(2.0, 1.07, -5.0);
-	waterlily();
+	waterlily(textureIdwaterlilyleaf);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(3.5, 1.07, -7.0);
-	waterlily();
+	waterlily(textureIdwaterlilyleaf);
 	glPopMatrix();
 
 	waterlilyflower(3.7, 3.07, -5.4, textureIdflowertop, textureIdflowerbase);
 	
 	glPushMatrix();
 	glTranslatef(-5.4, 1.07, 5.0);
-	waterlily();
+	waterlily(textureIdwaterlilyleaf);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-2.4, 1.07, 5.0);
-	waterlily();
+	waterlily(textureIdwaterlilyleaf);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-3.9, 1.07, 7.0);
-	waterlily();
+	waterlily(textureIdwaterlilyleaf);
 	glPopMatrix();
 
 	waterlilyflower(-4.0, 3.07, 5.4, textureIdflowertop, textureIdflowerbase);
@@ -423,6 +436,7 @@ void MyInit() {
 	loadTextureflowerbase();
 	loadTextureflowertop();
 	loadTextureskybackground();
+	loadTexturewaterlilyleaf();
 }
 
 void keyboard(unsigned char key, int x, int y) {

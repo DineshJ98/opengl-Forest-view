@@ -10,17 +10,23 @@ void leafcircle() {
 	for (int i = 0; i < 180; i++) {
 		GLfloat x = 1.0 * cos(angle);
 		GLfloat z = 1.0 * sin(angle);
+		glTexCoord2d(0.5 * cos(angle) + 0.5, 0.5 * sin(angle) + 0.5);
 		glVertex3f(x, 0.0, z);
 		angle += 2 * PIvalue / 180;
 	}
 	glEnd();
 }
 
-void waterlily() {
+void waterlily(GLfloat textureId) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT0);
 	glShadeModel(GL_SMOOTH);
+	glEnable(GL_TEXTURE_2D);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBindTexture(GL_TEXTURE_2D, textureId);
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, waterlilyleaf);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, waterlilydiff);
@@ -30,6 +36,7 @@ void waterlily() {
 	//gluSphere(gluNewQuadric(), 1.0, 50, 50);
 	leafcircle();
 
+	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT1);
 	glDisable(GL_LIGHT0);
